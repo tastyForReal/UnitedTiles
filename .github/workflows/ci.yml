@@ -1,0 +1,30 @@
+on: [push, pull_request]
+name: Continuous Integration
+
+permissions:
+    contents: read
+
+jobs:
+    build-windows:
+        name: Build (Windows)
+        runs-on: windows-latest
+        timeout-minutes: 60
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Add MSBuild to PATH
+              uses: microsoft/setup-msbuild@v2
+
+            - name: Build
+              run: msbuild /p:Configuration=Release "United Tiles.sln"
+
+            - name: Postbuild
+              run: cmd /c postbuild_windows.bat
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build-windows
+                  path: build/windows/output/
