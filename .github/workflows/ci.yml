@@ -44,8 +44,7 @@ jobs:
             - name: Cleanup
               run: |
                   cd build
-                  find . -type f -not -name 'UnitedTiles.exe' -delete
-                  find . -type d -not -name 'res' -delete
+                  find . -not -path './res/*' -not -path ./res -not -name United\ Tiles.exe -delete
                   echo "BUILD_TIME=$(date '+%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
 
             - name: Upload artifacts
