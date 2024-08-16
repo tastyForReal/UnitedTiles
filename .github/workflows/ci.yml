@@ -65,7 +65,6 @@ jobs:
               with:
                   java-version: 21
                   distribution: oracle
-                  cache: gradle
 
             - name: Grant execute permission for gradlew
               run: chmod +x gradlew
