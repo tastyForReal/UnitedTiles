@@ -18,7 +18,7 @@ jobs:
               uses: microsoft/setup-msbuild@v2
 
             - name: Build
-              run: msbuild /p:Configuration=Release "United Tiles.sln"
+              run: msbuild /p:Configuration=Release "United Tiles.vcxproj"
 
             - name: Postbuild
               run: cmd /c postbuild_windows.bat
