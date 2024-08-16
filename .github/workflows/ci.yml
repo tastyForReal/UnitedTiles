@@ -11,20 +11,29 @@ jobs:
         timeout-minutes: 60
 
         steps:
+            - name: Setup MSBuild
+              uses: microsoft/setup-msbuild@v2
+
+            - name: Install dependencies
+              run: |
+                  git clone https://github.com/microsoft/vcpkg.git
+                  cd vcpkg
+                  bootstrap-vcpkg.bat
+                  vcpkg.exe integrate install
+                  vcpkg.exe install curl sdl2 sdl2-image sdl2-ttf sdl2-mixer
+                  echo "$GITHUB_WORKSPACE" >> $GITHUB_PATH
+
             - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Add MSBuild to PATH
-              uses: microsoft/setup-msbuild@v2
+            - name: Configure CMake
+              run: cmake -S . -B build -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release
 
             - name: Build
-              run: msbuild /p:Configuration=Release "United Tiles.vcxproj"
-
-            - name: Postbuild
-              run: cmd /c postbuild_windows.bat
+              run: cmake --build build --config Release
 
             - name: Upload Artifact
               uses: actions/upload-artifact@v4
               with:
                   name: build-windows
-                  path: build/windows/output/
+                  path: build/
