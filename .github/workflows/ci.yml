@@ -68,10 +68,7 @@ jobs:
 
             - name: Build with Gradle
               run: |
-                  rm -Rf build/android/
-                  cp -R android/ build/
-                  cp -R res/. build/android/app/src/main/assets
-                  cd build/android/
+                  cd android
                   gradle assembleRelease
                   echo "BUILD_TIME=$(date '+%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
 
