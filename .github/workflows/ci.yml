@@ -8,24 +8,37 @@ jobs:
     build-windows:
         name: Build (Windows)
         runs-on: windows-latest
+        defaults:
+            run:
+                shell: msys2 {0}
         timeout-minutes: 60
 
         steps:
-            - name: Setup MSBuild
-              uses: microsoft/setup-msbuild@v2
+            - name: Install dependencies
+              uses: msys2/setup-msys2@v2
+              with:
+                  install: >-
+                      git
+                      base-devel
+                      mingw-w64-x86_64-gcc
+                      mingw-w64-x86_64-cmake
+                      mingw-w64-x86_64-curl
+                      mingw-w64-x86_64-SDL2
+                      mingw-w64-x86_64-SDL2_image
+                      mingw-w64-x86_64-SDL2_mixer
+                      mingw-w64-x86_64-SDL2_ttf
+                  update: true
 
             - name: Checkout
               uses: actions/checkout@v4
 
             - name: Configure CMake
-              run: >
-                cmake -S . -B build -G "Visual Studio 17 2022"
-                -DCMAKE_BUILD_TYPE=Release
+              run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
             - name: Build
-              run: cmake --build build --config Release
+              run: ninja -C build
 
-            - name: Upload Artifact
+            - name: Upload artifacts
               uses: actions/upload-artifact@v4
               with:
                   name: build-windows
