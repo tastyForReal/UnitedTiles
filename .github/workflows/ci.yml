@@ -40,8 +40,9 @@ jobs:
 
             - name: Cleanup
               run: |
-                  find build/ -type f -not -name 'UnitedTiles.exe' -delete
-                  find build/ -type d -not -name 'res' -delete
+                  cd build
+                  find . -type f -not -name 'UnitedTiles.exe' -delete
+                  find . -type d -not -name 'res' -delete
 
             - name: Store build time
               run: echo "BUILD_TIME=$(date '+%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
