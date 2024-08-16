@@ -71,7 +71,7 @@ jobs:
                   mkdir -p build/android/app/src/main/assets/
                   cp -R android/ build/
                   cp -R res/ build/android/app/src/main/assets/
-                  cd build
+                  cd build/android
                   gradle assembleRelease
                   echo "BUILD_TIME=$(date '+%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
 
