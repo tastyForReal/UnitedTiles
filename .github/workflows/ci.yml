@@ -1,5 +1,5 @@
 on: [push, pull_request]
-name: Continuous Integration
+name: CI
 
 permissions:
     contents: read
@@ -51,5 +51,5 @@ jobs:
             - name: Upload artifacts
               uses: actions/upload-artifact@v4
               with:
-                  name: 'UnitedTiles-Windows_${{env.BUILD_TIME}}'
+                  name: UnitedTiles-Windows_${{env.BUILD_TIME}}
                   path: build/
