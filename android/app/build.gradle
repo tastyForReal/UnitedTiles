@@ -3,14 +3,13 @@ plugins {
 }
 
 android {
-	compileSdkVersion 30
-	buildToolsVersion '30.0.3'
+	compileSdkVersion 34
 	namespace 'com.volian.unitedtiles'
 
 	defaultConfig {
 		applicationId 'com.volian.unitedtiles'
-		minSdkVersion 21
-		targetSdkVersion 30
+		minSdkVersion 23
+		targetSdkVersion 34
 		versionCode 1
 		versionName '1.1.3'
 		
