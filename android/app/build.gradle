@@ -2,81 +2,44 @@ apply plugin: 'com.android.application'
 
 android {
 
-    namespace "com.volian.unitedtiles"
-
-signingConfigs {
-
-	release {
-       /*storeFile file("$System.env.RELEASE_STORE_FILE")
-       storePassword "$System.env.RELEASE_STORE_PASSWORD"
-       keyAlias "$System.env.RELEASE_KEY_ALIAS"
-       keyPassword "$System.env.RELEASE_KEY_PASSWORD"*/
-       storeFile file("$System.env.MP_REL_STORE_FILE")
-       storePassword "$System.env.MP_REL_STORE_PASSWORD"
-       keyAlias "$System.env.MP_REL_KEY_ALIAS"
-       keyPassword "$System.env.MP_REL_KEY_PASSWORD" 
-       v1SigningEnabled true
-       v2SigningEnabled true
-   }
-}
-
-	ndkVersion "22.1.7171670" 
-    //ndkVersion "26.3.11579264"
-    //ndkVersion "22.1.7171670" 
+	namespace "com.volian.unitedtiles"
+	ndkVersion "26.3.11579264"
 	compileSdkVersion 34
-    defaultConfig {
-        applicationId "com.volian.unitedtiles"
-        minSdkVersion 23
-        targetSdkVersion 34
-        versionCode 39
-        versionName "1.1.3"  
-        ndk {
-            abiFilters 'armeabi-v7a'
-        }
-    }
-    buildTypes {
-        release {
-	    ndk {
-                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86' ,'x86_64'
-                //abiFilters 'armeabi-v7a'
-            }
-	    shrinkResources true
-	    signingConfig signingConfigs.release
-            minifyEnabled true
-            debuggable false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    externalNativeBuild {
-        ndkBuild {
-            path "src/main/jni/Android.mk" 
-
-        }
-    }
-
-    /*packagingOptions {
-        jniLibs.useLegacyPackaging true
-    }*/
+	defaultConfig {
+		applicationId "com.volian.unitedtiles"
+		minSdkVersion 23
+		targetSdkVersion 34
+		versionCode 39
+		versionName "1.1.3"
+		ndk {
+			abiFilters 'armeabi-v7a'
+		}
+	}
+	buildTypes {
+		release {
+		ndk {
+			abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86' ,'x86_64'
+		}
+		shrinkResources true
+		signingConfig signingConfigs.release
+			minifyEnabled true
+			debuggable false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
+	externalNativeBuild {
+		ndkBuild {
+			path "src/main/jni/Android.mk"
+		}
+	}
 }
 
- dependencies {
-    implementation "com.google.android.gms:play-services-games-v2:+"
-    implementation 'com.google.android.gms:play-services-ads:23.1.0'
-    implementation 'com.google.android.play:review:2.0.1' 
-    //implementation("com.google.ads.mediation:vungle:7.3.2.0")
-
-    //implementation 'com.ironsource.sdk:mediationsdk:8.1.0' 
-    //implementation("com.google.ads.mediation:ironsource:8.1.0.0")
-
-    implementation("com.google.ads.mediation:ironsource:8.1.0.0")
-
-implementation 'com.google.android.gms:play-services-appset:16.0.0'
-implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
-
-  implementation("com.google.android.ump:user-messaging-platform:2.2.0")
-
-
-    //implementation 'com.ironsource:adqualitysdk:7.20.1'
-
-    //implementation 'com.google.android.play:core:1.10.3'
-  }
+dependencies {
+	implementation 'com.google.android.gms:play-services-games-v2:+'
+	implementation 'com.google.android.gms:play-services-ads:23.1.0'
+	implementation 'com.google.android.play:review:2.0.1'
+	implementation 'com.google.ads.mediation:ironsource:8.1.0.0'
+	implementation 'com.google.android.gms:play-services-appset:16.0.0'
+	implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+	implementation 'com.google.android.ump:user-messaging-platform:2.2.0'
+}
