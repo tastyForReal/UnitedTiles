@@ -100,8 +100,12 @@ jobs:
 
             - name: Build
               run: |
-                  cd android
-                  ./gradlew assembleRelease --no-daemon
+                  mkdir -p build
+                  cp -R android/ build/
+                  mkdir -p build/android/app/src/main/assets/
+                  cp -R res/ build/android/app/src/main/assets/
+                  cd build/android/
+                  gradle assembleRelease --no-daemon
 
             - name: Prepare artifact
               run: echo "BUILD_TIME=$(date '+%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
