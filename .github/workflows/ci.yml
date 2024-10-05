@@ -92,14 +92,11 @@ jobs:
             - name: Install Java
               uses: actions/setup-java@v4
               with:
-                  distribution: temurin
-                  java-version: 11
-                  cache: gradle
+                  distribution: zulu
+                  java-version: 21
 
             - name: Setup Android SDK
               uses: android-actions/setup-android@v3
-              with:
-                cmdline-tools-version: 9.0
 
             - name: Build
               run: |
@@ -108,7 +105,7 @@ jobs:
                   mkdir -p build/android/app/src/main/assets/
                   cp -R res/ build/android/app/src/main/assets/
                   cd build/android/
-                  gradle assembleRelease
+                  gradle assembleRelease --no-daemon
 
             - name: Prepare artifact
               run: echo "BUILD_TIME=$(date '+%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
