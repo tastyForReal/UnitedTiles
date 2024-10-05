@@ -81,7 +81,7 @@ jobs:
 
     android:
         name: Build (Android)
-        runs-on: windows-latest
+        runs-on: ubuntu-latest
         env:
             BUILD_TIME:
 
@@ -99,7 +99,6 @@ jobs:
               uses: android-actions/setup-android@v3
 
             - name: Build
-              shell: bash
               run: |
                   mkdir -p build
                   cp -R android/ build/
